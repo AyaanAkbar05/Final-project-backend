@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
 const expiration = "2h"; 
 
+//Get all users
 async function getAllUsers(req, res) {
 	console.log(req.user);
 
@@ -17,10 +18,12 @@ async function getAllUsers(req, res) {
 	res.json(user);
 }
 
+//Get user by id
 function getUserById(req, res) {
 	res.send(`Data for user: ${req.params.id}`);
 }
 
+//REGISTER
 async function registerUser(req, res) {
 	try {
 		const alreadyExist = await User.findOne({ email: req.body.email });
@@ -38,6 +41,7 @@ async function registerUser(req, res) {
 	}
 }
 
+//LOGIN
 async function loginUser(req, res) {
 	try {
 		const { email, password } = req.body;
